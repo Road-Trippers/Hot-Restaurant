@@ -12,6 +12,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery.js"></script>
+
   </head>
   <body>
     <div class="container">
@@ -79,6 +81,7 @@
     <script type="text/javascript">
       // Question: What does this code do?
       $("#add-btn").on("click", function(event) {
+        console.log('hello')
         event.preventDefault();
         var newTable = {
           name: $("#reserve-name").val().trim(),
@@ -88,7 +91,7 @@
         };
   
         // Question: What does this code do??
-        $.post("/api/new_reservation", newTable)
+        $.post("/api/tables", newTable)
           .then(function(data) {
             console.log("reserve.html", data);
             alert("Adding table...");
