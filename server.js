@@ -14,33 +14,40 @@ var tables = [];
 var wait_list = [];
 
 app.listen(PORT, function () {
-	console.log("App listening on PORT " + PORT);
+  console.log("App listening on PORT " + PORT);
 });
 
 app.get("/", function (req, res) {
-	res.sendFile(path.join(__dirname, "app/public/home.html"));
+  res.sendFile(path.join(__dirname, "app/public/home.html"));
 });
 
 app.get("/reserve", function (req, res) {
-	res.sendFile(path.join(__dirname, "app/public/reserve.html"));
+  res.sendFile(path.join(__dirname, "app/public/reserve.html"));
 });
 app.get("/tables", function (req, res) {
-	res.sendFile(path.join(__dirname, "app/public/tables.html"));
+  res.sendFile(path.join(__dirname, "app/public/tables.html"));
 });
 
 app.get("/api/tables", function (req, res) {
-	return res.json(tables);
+  return res.json(tables);
 });
 
 app.get("/api/wait_list", function (req, res) {
-	return res.json(wait_list);
+  return res.json(wait_list);
 });
 
 app.post("/api/tables", function (req, res) {
-	let newTable = req.body;
-	if (tables.length < 5) {
-		tables.push(newTable);
-	} else {
-		wait_list.push(newTable);
-	}
+  let newTable = req.body;
+  if (tables.length < 5) {
+    tables.push(newTable);
+  } else {
+    wait_list.push(newTable);
+  }
+  res.json(true);
+});
+
+app.post("/api/clear_tables", function (req, res) {
+  tables = [];
+  wait_list = [];
+  res.json(true);
 });
