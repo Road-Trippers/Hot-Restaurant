@@ -51,3 +51,7 @@ app.post("/api/clear_tables", function (req, res) {
   wait_list = [];
   res.json(true);
 });
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "app/public/home.html"));
+});
